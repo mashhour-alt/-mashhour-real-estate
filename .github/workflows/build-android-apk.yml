@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Build Appetize Android APK
 
 on:
   workflow_dispatch:
@@ -36,14 +36,14 @@ jobs:
         run: flutter analyze
       - name: Run tests
         run: flutter test
-      - name: Build installable release APK
-        run: flutter build apk --release
+      - name: Build Appetize-compatible Android APK
+        run: flutter build apk --debug --target-platform android-x64
       - name: Rename APK
-        run: cp build/app/outputs/flutter-apk/app-release.apk carpet-shop-manager.apk
+        run: cp build/app/outputs/flutter-apk/app-debug.apk carpet-shop-manager-appetize-x64.apk
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: carpet-shop-manager-android
-          path: carpet-shop-manager.apk
+          name: carpet-shop-manager-appetize-x64
+          path: carpet-shop-manager-appetize-x64.apk
           if-no-files-found: error
           retention-days: 30
